@@ -13,6 +13,8 @@ find_package(base_interfaces_demo REQUIRED)
 
 add_executable(demo01_talker_str src/demo01_talker_str.cpp)
 add_executable(demo01_listener_str src/demo01_listener_str.cpp)
+add_executable(demo02_talker_stu src/demo02_talker_stu.cpp)
+add_executable(demo02_listener_stu src/demo02_listener_stu.cpp)
 
 target_include_directories(demo01_talker_str PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -22,17 +24,28 @@ ament_target_dependencies(
   demo01_talker_str
   "rclcpp"
   "std_msgs"
-  "base_interfaces_demo"
 )
 ament_target_dependencies(
   demo01_listener_str
   "rclcpp"
   "std_msgs"
 )
+ament_target_dependencies(
+  demo02_talker_stu
+  "rclcpp"
+  "base_interfaces_demo"
+)
+ament_target_dependencies(
+  demo02_listener_stu
+  "rclcpp"
+  "base_interfaces_demo"
+)
 
 install(TARGETS 
   demo01_talker_str 
   demo01_listener_str
+  demo02_talker_stu
+  demo02_listener_stu
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
