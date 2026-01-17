@@ -24,9 +24,15 @@ public:
     AddIntsServer()
     : Node("add_ints_server")
     {
-        RCLCPP_INFO(this->get_logger(), "服务端创建！");
         // 3-1.创建服务端
         server_ = this->create_service<AddInts>("add_ints", std::bind(&AddIntsServer::add, this, std::placeholders::_1, std::placeholders::_2));
+        /*
+        create_service
+        模板:服务接口类型
+        参数:1.服务话题 2.回调函数
+        返回值:服务对象指针
+        */
+        RCLCPP_INFO(this->get_logger(), "服务端创建！");
     }
 private:
     void add(const AddInts::Request::SharedPtr req, const AddInts::Response::SharedPtr res)
