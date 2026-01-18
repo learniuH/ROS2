@@ -1,24 +1,17 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>base_interfaces_demo</name>
+  <name>cpp03_action</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="lh@todo.todo">lh</maintainer>
+  <maintainer email="L13320500248@163.com">lh</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <!-- action构建工具依赖 -->
-  <buildtool_depend>rosidl_default_generators</buildtool_depend>
-  <!--  -->
-  <depend>action_msgs</depend>
 
-  <!-- 编译依赖 -->
-  <build_depend>rosidl_default_generators</build_depend>
-  <!-- 执行依赖 -->
-  <exec_depend>rosidl_default_runtime</exec_depend>
-  <!-- 声明当前功能包所属的功能组 -->
-  <member_of_group>rosidl_interface_packages</member_of_group>
+  <depend>rclcpp</depend>
+  <depend>base_interfaces_demo</depend>
+  <depend>rclcpp_action</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

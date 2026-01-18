@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(base_interfaces_demo)
+project(cpp03_action)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,17 +7,24 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(base_interfaces_demo REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
-# 为接口文件生成源码
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Student.msg"
-  "srv/AddInts.srv"
-  "action/Progress.action"
+add_executable(demo01_action_server src/demo01_action_server.cpp)
+target_include_directories(demo01_action_server PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_compile_features(demo01_action_server PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(
+  demo01_action_server
+  "rclcpp"
+  "base_interfaces_demo"
+  "rclcpp_action"
 )
+
+install(TARGETS demo01_action_server
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
