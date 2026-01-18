@@ -10,8 +10,10 @@
     5.释放资源
 */
 
-// 测试方法：
-// ros2 service call /add_ints base_interfaces_demo/srv/AddInts "{'num1': 10, 'num2': 30}"
+/*
+测试方法：
+    ros2 service call /add_ints base_interfaces_demo/srv/AddInts "{'num1': 10, 'num2': 30}"
+*/
 
 #include <rclcpp/rclcpp.hpp>
 #include <base_interfaces_demo/srv/add_ints.hpp>

@@ -12,6 +12,7 @@ find_package(base_interfaces_demo REQUIRED)
 find_package(rclcpp_action REQUIRED)
 
 add_executable(demo01_action_server src/demo01_action_server.cpp)
+add_executable(demo01_action_client src/demo01_action_client.cpp)
 target_include_directories(demo01_action_server PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
@@ -19,11 +20,19 @@ target_compile_features(demo01_action_server PUBLIC c_std_99 cxx_std_17)  # Requ
 ament_target_dependencies(
   demo01_action_server
   "rclcpp"
-  "base_interfaces_demo"
   "rclcpp_action"
+  "base_interfaces_demo"
+)
+ament_target_dependencies(
+  demo01_action_client
+  "rclcpp"
+  "rclcpp_action"
+  "base_interfaces_demo"
 )
 
-install(TARGETS demo01_action_server
+install(TARGETS 
+  demo01_action_server
+  demo01_action_client
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
