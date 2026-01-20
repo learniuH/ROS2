@@ -90,6 +90,7 @@ int main(int argc, char * argv[])
         /*
         rclcpp::get_logger("name") 创建 logger 对象不依赖于 context
         */
+       return 0;
     }
 
     auto future = client->send_request(atoi(argv[1]), atoi(argv[2]));
