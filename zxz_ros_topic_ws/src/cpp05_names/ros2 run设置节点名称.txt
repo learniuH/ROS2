@@ -1,0 +1,31 @@
+											  ros2 run 设置节点名称（解决节点重名）
+>>ros2 run turtlesim turtlesim_node
+>>ros2 node list
+  /turtlesim
+  	
+>>ros2 topic lsit 
+  /turtle1/cmd_vel
+  /turtle1/colcor_sensor
+  /turtle1/pose
+
+1.ros2 run 设置命名空间
+  ros2 run turtlesim turtlesim_node --ros-args --remap __ns:=/t1
+ 
+2.ros2 node list 运行结果
+  /t1/turtlesim
+
+
+3.ros2 run 设置节点重映射
+  ros2 run turtlesim turtlesim_node --ros-args --remap __name:=turtle1
+  ros2 run turtlesim turtlesim_node --ros-args --remap __node:=turtle2
+
+4.ros2 node list 运行结果
+  /turtle1
+  /turtle2
+
+
+5.ros2 run 设置命名空间与名称重映射叠加
+  ros2 run turtlesim turtlesim_node --ros-args --remap __ns:=/t1 --remap __name:=turtle1
+
+6.ros2 node list 运行结果
+  /t1/turtle1
