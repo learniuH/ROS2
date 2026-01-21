@@ -8,4 +8,7 @@ def generate_launch_description():
         Node(package='turtlesim', executable='turtlesim_node', name='turtle_py'),
         Node(package='turtlesim', executable='turtlesim_node', namespace='ns_py'),
         Node(package='turtlesim', executable='turtlesim_node', namespace='ns_py', name='turtle_py'),
+
+        # 通过launch.py修改话题名称，解决话题重名问题
+        Node(package='turtlesim', executable='turtlesim_node', remappings=[('/turtle1/cmd_vel', '/cmd_vel')]),
     ])
