@@ -19,7 +19,9 @@ public:
     {
         // this->demo_rate();
         // this->demo_time();
-        this->demo_duration();
+        // this->demo_duration();
+        
+        this->demo_opt();
     }
 private:
     // 演示Rate使用
@@ -67,6 +69,29 @@ private:
         // 2.调用Duration对象的函数
         RCLCPP_INFO(this->get_logger(), "sec = %.2f, nsec = %ld", du1.seconds(), du1.nanoseconds());
         RCLCPP_INFO(this->get_logger(), "sec = %.2f, nsec = %ld", du2.seconds(), du2.nanoseconds());
+    }
+    // 演示运算符使用
+    void demo_opt()
+    {
+        rclcpp::Time t1(10, 0);
+        rclcpp::Time t2(30, 0);
+
+        rclcpp::Duration du1(8, 0);
+        rclcpp::Duration du2(17, 0);
+
+        // 运算符
+        // 比较运算
+        RCLCPP_INFO(this->get_logger(), "t1 >= t2 ? %d", t1 >= t2);     // 0
+        RCLCPP_INFO(this->get_logger(), "t1 <= t2 ? %d", t1 <= t2);     // 1
+        RCLCPP_INFO(this->get_logger(), "du1 > du2 ? %d", du1 > du2);   // 0
+
+        // 数学运算
+        rclcpp::Duration du3 = t1 - t2; // 不支持 Time + Time（时间点 + 时间点）
+        rclcpp::Time t3 = t2 + du1;
+        rclcpp::Duration du4 = du2 * 3;
+        RCLCPP_INFO(this->get_logger(), "t1 - t2 = %.2f", du3.seconds());   // -20
+        RCLCPP_INFO(this->get_logger(), "t2 + du1 = %.2f", t3.seconds());   // 38
+        RCLCPP_INFO(this->get_logger(), "du2 * 3 = %.2f", du4.seconds());   // 51
     }
 };
 
