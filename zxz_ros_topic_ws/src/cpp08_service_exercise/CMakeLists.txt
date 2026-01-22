@@ -13,10 +13,15 @@ find_package(base_interfaces_demo REQUIRED)
 find_package(turtlesim REQUIRED)
 
 add_executable(exer01_server src/exer01_server.cpp)
+add_executable(exer01_client src/exer01_client.cpp)
 target_include_directories(exer01_server PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+target_include_directories(exer01_client PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
 target_compile_features(exer01_server PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_compile_features(exer01_client PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 ament_target_dependencies(
   exer01_server
   "rclcpp"
@@ -24,8 +29,17 @@ ament_target_dependencies(
   "base_interfaces_demo"
   "turtlesim"
 )
+ament_target_dependencies(
+  exer01_client
+  "rclcpp"
+  "rclcpp_action"
+  "base_interfaces_demo"
+  "turtlesim"
+)
 
-install(TARGETS exer01_server
+install(TARGETS 
+  exer01_server
+  exer01_client
   DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
