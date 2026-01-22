@@ -22,7 +22,7 @@ def generate_launch_description():
     exer_client = Node(
         package='cpp08_service_exercise', 
         executable='exer01_client',
-        arguments=[str(x), str(y), str(theta)]
+        arguments=[str(x), str(y), str(theta)]  # ros2 run ... x y theta --ros-args
     )
 
     return LaunchDescription([spawn_turtle2, exer_client])
