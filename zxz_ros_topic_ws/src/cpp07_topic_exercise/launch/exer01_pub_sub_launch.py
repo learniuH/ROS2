@@ -16,7 +16,7 @@ def generate_launch_description():
     )
 
     # 3.调用自定义节点（必须在第二只乌龟掉头结束后）
-    exer01 = Node(package='cpp07_exercise', executable='exer01_pub_sub')
+    exer01 = Node(package='cpp07_topic_exercise', executable='exer01_pub_sub')
     # 通过注册事件完成控制节点的执行顺序
     # 创建事件注册对象，在对象中声明针对哪个目标节点，在哪个事件触发时，执行哪种操作
     run_exer01_event = RegisterEventHandler(
