@@ -1,0 +1,9 @@
+launch:
+  - node:
+      pkg: "turtlesim"
+      exec: "turtlesim_node"
+      name: "yaml_t1"
+  - node:
+      pkg: "turtlesim"
+      exec: "turtlesim_node"
+      name: "yaml_t2"
