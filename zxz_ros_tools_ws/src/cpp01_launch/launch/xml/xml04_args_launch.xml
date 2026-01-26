@@ -1,0 +1,13 @@
+<launch>
+    <!-- 启动turtlesim_node时动态设置背景颜色 -->
+    <!-- 1.声明参数 -->
+    <arg name="launch_args_bgr" default="255" />
+
+    <!-- 2.调用参数 -->
+    <node pkg="turtlesim" exec="turtlesim_node">
+        <param name="background_r" value="$(var launch_args_bgr)" />
+    </node>
+
+    <!-- 3.launch文件执行时动态传参 -->
+    <!-- ros2 launch cpp01_launch xml04_args_launch.xml launch_args_bgr:=100 -->
+</launch>
