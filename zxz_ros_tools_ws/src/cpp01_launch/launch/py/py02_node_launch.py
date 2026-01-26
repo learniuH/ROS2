@@ -30,7 +30,7 @@ def generate_launch_description():
         executable='turtlesim_node',
         name='turtle_py',                                               # 节点名称重命名/turtle_py
         namespace='ns_py',                                              # 添加/ns_py命名空间
-        exec_name='custom_turtle',                                      # 终端[custom_turtle]标签
+        exec_name='custom_turtle',                                      # 日志输出使用[custom_turtle]标签
         # parameters=[{'background_r': 255}],                           # 直接修改节点参数
         parameters=[os.path.join(get_package_share_directory('cpp01_launch'), 
                                  'config', 'ns_py__turtle_py.yaml')],   # 通过yaml文件设置节点参数（更常用），yaml通过ros2 param dump导出
