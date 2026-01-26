@@ -1,0 +1,14 @@
+launch:
+  - node:
+      pkg: "turtlesim"
+      exec: "turtlesim_node"
+      name: "turtle_yaml"
+      namespace: "ns_yaml"
+      exec_name: "custom_turtle"
+      respawn: "True"
+      param:
+        # - name: "background_g"
+        #   value: 255
+        - from: "$(find-pkg-share cpp01_launch)/config/ns_yaml__turtle_yaml.yaml"
+      ros_args: "--remap /ns_yaml/turtle1/cmd_vel:=/cmd_vel"
+      args: "--ros-args --remap /ns_yaml/turtle1/pose:=/pose"
