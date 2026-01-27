@@ -36,7 +36,7 @@ def generate_launch_description():
                                  'config', 'ns_py__turtle_py.yaml')],   # 通过yaml文件设置节点参数（更常用），yaml通过ros2 param dump导出
         remappings=[('/ns_py/turtle1/cmd_vel', '/cmd_vel')],            # 话题重命名/turtle1/cmd_vel
         ros_arguments=['--remap', '/ns_py/turtle1/pose:=/pose'],        # 添加前缀 --ros-args --remap /ns_py/turtle/pose:=/pose 实现话题重命名
-        arguments=[str(arg1)],                                          # turtlesim_node节点启动时传参
+        arguments=[str(arg1)],                                          # turtlesim_node节点启动时传参，会添加--ros-args
         respawn=True                                                    # 节点重启
     )
 

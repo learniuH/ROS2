@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(cpp03_rf_broadcaster)
+project(cpp03_tf_broadcaster)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -29,6 +29,8 @@ ament_target_dependencies(
 
 install(TARGETS demo01_static_tf_broadcaster
   DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
