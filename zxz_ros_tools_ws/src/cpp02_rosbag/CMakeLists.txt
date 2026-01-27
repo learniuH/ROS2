@@ -11,19 +11,28 @@ find_package(rclcpp REQUIRED)
 find_package(rosbag2_cpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
-add_executable(demo01_write src/demo01_write.cpp)
-target_include_directories(demo01_write PUBLIC
+add_executable(demo01_writer src/demo01_writer.cpp)
+add_executable(demo01_reader src/demo01_reader.cpp)
+target_include_directories(demo01_writer PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_compile_features(demo01_write PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_compile_features(demo01_writer PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 ament_target_dependencies(
-  demo01_write
+  demo01_writer
+  "rclcpp"
+  "rosbag2_cpp"
+  "geometry_msgs"
+)
+ament_target_dependencies(
+  demo01_reader
   "rclcpp"
   "rosbag2_cpp"
   "geometry_msgs"
 )
 
-install(TARGETS demo01_write
+install(TARGETS 
+  demo01_writer
+  demo01_reader
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
