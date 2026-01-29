@@ -1,5 +1,7 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 from ament_index_python import get_package_share_directory
 
 import os
@@ -15,8 +17,8 @@ def generate_launch_description():
     x = random.uniform(1.0, 10.0)
     y = random.uniform(1.0, 10.0)
     theta = random.uniform(0.0, 6.28)
-    name = 'turtle2'
-    
+    turtle_name = DeclareLaunchArgument(name="turtle_name", default_value="turtle2")
+
     turtle = Node(package='turtlesim', executable='turtlesim_node')
 
     spawn = Node(
@@ -26,7 +28,7 @@ def generate_launch_description():
             {'x': x}, 
             {'y': y}, 
             {'theta': theta},
-            {'name': name}
+            {'name': LaunchConfiguration('turtle_name')}
         ]
     )
 
@@ -40,7 +42,23 @@ def generate_launch_description():
         package='cpp05_exercise',
         executable='exer01_transform_broadcaster',
         name='tf_broadcaster_2',
-        parameters=[{'turtle_name': name}]
+        parameters=[{'turtle_name': LaunchConfiguration('turtle_name')}]
+    )
+
+    cmd_publisher = Node(
+        package='cpp05_exercise',
+        executable='exer01_transform_listener',
+        parameters=[
+            {'frame_id': LaunchConfiguration('turtle_name')},
+            {'child_frame_id': "turtle1"}
+        ]
+    )
+
+    turtle_keyboard = Node(
+        package='turtlesim',
+        executable='turtle_teleop_key',
+        prefix='gnome-terminal --',
+        output='screen'
     )
 
     rviz2 = Node(
@@ -49,4 +67,4 @@ def generate_launch_description():
         arguments=['-d', rviz_path]
     )
 
-    return LaunchDescription([turtle, spawn, tf_broadcaster_1, tf_broadcaster_2, rviz2])
+    return LaunchDescription([turtle_name, turtle, spawn, tf_broadcaster_1, tf_broadcaster_2, cmd_publisher, turtle_keyboard, rviz2])
