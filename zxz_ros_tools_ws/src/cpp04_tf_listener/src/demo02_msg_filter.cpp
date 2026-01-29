@@ -1,3 +1,20 @@
+/*  
+  需求：将雷达感知到的障碍物的坐标点数据（相对于 laser 坐标系），
+       转换成相对于底盘坐标系（base_link）的坐标点。
+
+  步骤：
+    1.包含头文件；
+    2.初始化 ROS 客户端；
+    3.定义节点类；
+      3-1.创建tf缓存对象指针；
+      3-2.创建tf监听器；
+      3-3.创建坐标点订阅方并订阅指定话题；
+      3-4.创建消息过滤器过滤被处理的数据；
+      3-5.为消息过滤器注册转换坐标点数据的回调函数。
+    4.调用 spin 函数，并传入对象指针；
+    5.释放资源。
+
+*/
 
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/buffer.hpp>
@@ -18,6 +35,7 @@ public:
     : Node("tf_point_listener")
     {
         RCLCPP_INFO(this->get_logger(), "坐标点转换对象创建！");
+        // 3-1.创建tf缓存对象指针；
         buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
         /* 
             CreateTimerROS(
@@ -32,8 +50,10 @@ public:
         /* void setCreateTimerInterface(tf2_ros::CreateTimerInterface::SharedPtr create_timer_interface) */
         buffer_->setCreateTimerInterface(timer_);
 
+        // 3-2.创建tf监听器；
         listener_ = std::make_shared<tf2_ros::TransformListener>(*buffer_);
 
+        // 3-3.创建坐标点订阅方并订阅指定话题；
         point_sub_.subscribe(this, "point");
 
         /* 
@@ -46,6 +66,7 @@ public:
             const rclcpp::node_interfaces::NodeClockInterface::SharedPtr &node_clock, 
             std::chrono::duration<TimeRepT, TimeT> buffer_timeout) 
         */
+        // 3-4.创建消息过滤器过滤被处理的数据
         filter_ = std::make_shared<tf2_ros::MessageFilter<geometry_msgs::msg::PointStamped>>(
             point_sub_,
             *buffer_,
@@ -55,6 +76,7 @@ public:
             this->get_node_clock_interface(),
             1s
         );
+        // 3-5.为消息过滤器注册转换坐标点数据的回调函数
         filter_->registerCallback(&TFPointListener::transform_point, this);
     }
 private:
