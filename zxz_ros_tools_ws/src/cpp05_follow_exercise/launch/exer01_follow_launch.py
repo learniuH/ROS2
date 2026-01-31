@@ -9,7 +9,7 @@ import random
 
 def generate_launch_description():
     rviz_path = os.path.join(
-        get_package_share_directory('cpp05_exercise'),
+        get_package_share_directory('cpp05_follow_exercise'),
         'launch',
         'exer01_follow.rviz'
     )
@@ -22,7 +22,7 @@ def generate_launch_description():
     turtle = Node(package='turtlesim', executable='turtlesim_node')
 
     spawn = Node(
-        package='cpp05_exercise',
+        package='cpp05_follow_exercise',
         executable='exer01_spawn',
         parameters=[
             {'x': x}, 
@@ -33,20 +33,20 @@ def generate_launch_description():
     )
 
     tf_broadcaster_1 = Node(
-        package='cpp05_exercise',
+        package='cpp05_follow_exercise',
         executable='exer01_transform_broadcaster',
         name='tf_broadcaster_1',
     )
 
     tf_broadcaster_2 = Node(
-        package='cpp05_exercise',
+        package='cpp05_follow_exercise',
         executable='exer01_transform_broadcaster',
         name='tf_broadcaster_2',
         parameters=[{'turtle_name': LaunchConfiguration('turtle_name')}]
     )
 
     cmd_publisher = Node(
-        package='cpp05_exercise',
+        package='cpp05_follow_exercise',
         executable='exer01_transform_listener',
         parameters=[
             {'frame_id': LaunchConfiguration('turtle_name')},
