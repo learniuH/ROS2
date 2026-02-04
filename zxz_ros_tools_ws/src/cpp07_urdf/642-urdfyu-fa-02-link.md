@@ -1,41 +1,16 @@
-# URDF语法
+### 6.4.2 URDF语法02\_link
 
-## 01_robot
+#### 1.简介 {#link}
 
-### 1.简介
+urdf 中的 link 标签用于描述机器人某个部件\(也即刚体部分\)的外观和物理属性，比如: 机器人底座、轮子、激光雷达、摄像头...每一个部件都对应一个 link, 在 link 标签内，可以设计该部件的形状、尺寸、颜色、惯性矩阵、碰撞参数等一系列属性。
 
-urdf中为保证xml语法完整性，使用了`robot`标签作为根标签，所有的link和joint以及其他标签都必须包含在robot标签内，该标签内可以通过`name`属性设置机器人模型的名称。
+![](/assets/6.4.2urdf_link.png)
 
-### 2.属性
+#### 2.属性 {#1属性}
 
-- name: 主文件必须具有name属性，name属性在被包含文件中是可选的。如果被包含文件中指定了属性名称，则它必须具有与主文件中相同的值。
+* name（必填）：为连杆命名。
 
-### 3.子标签
-
-其他标签都是字集标签。
-
-### 4.实例
-
-```xml
-<robot name="my_robot">
-
-</robot>
-```
-
-
-## 02_link
-
-### 1.简介
-
-urdf 中的 link 标签用于描述机器人某个部件（业绩刚体部分）的外观和物理属性，比如：机器人底座、轮子、激光雷达、摄像头...每个部件都对应一个 link，在 link 标签内，可以设计该部件的形状、尺寸、颜色、惯性矩阵、碰撞参数等一系列属性。
-
-![](/src/cpp07_urdf/md_img/urdf_link.png)
-
-### 2.属性
-
-- name（必填）：为连杆命名。
-
-### 3.子标签
+#### 3.子标签 {#2子标签}
 
 **&lt;visual&gt;**（可选）：用于描述link的可视化属性，可以设置link的形状（立方体、球体、圆柱等）。
 
@@ -69,16 +44,46 @@ urdf 中的 link 标签用于描述机器人某个部件（业绩刚体部分）
 
 **注意：**&lt;collision&gt; 和 &lt;inertial&gt; 在仿真环境下才需要使用到，如果只是在 rviz2 中集成 urdf，那么不必须为 link 定义这两个标签。
 
-### 4.实例
+#### 4.示例 {#3案例}
 
-#### 1.需求
+##### 1.需求
 
 分别生成长方体、圆柱与球体的机器人部件。
 
-#### 2.实现
+##### 2.实现
 
-功能包 cpp07_urdf 的 urdf/urdf 目录下，新建 urdf 文件 demo02_link.urdf，并编辑文件：
+功能包 cpp06\_urdf 的 urdf/urdf 目录下，新建 urdf 文件 demo02\_link.urdf，并编辑文件，输入如下内容：
 
 ```xml
+<robot name="link_demo">
+  <!-- 定义颜色 -->
+  <material name="yellow">
+    <color rgba="0.7 0.7 0 0.8" />
+  </material>
+  <link name="base_link">
+    <visual>
+        <!-- 形状 -->
+        <geometry>
+            <!-- 长方体的长宽高 -->
+            <box size="0.5 0.3 0.1" />
+            <!-- 圆柱，半径和长度 -->
+            <!-- <cylinder radius="0.5" length="1.0" /> -->
+            <!-- 球体，半径-->
+            <!-- <sphere radius="0.3" /> -->
 
+        </geometry>
+        <!-- xyz坐标 rpy翻滚俯仰与偏航角度(3.14=180度) -->
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <!-- 调用已定义的颜色 -->
+        <material name="yellow"/>
+    </visual>
+  </link>
+</robot>
 ```
+
+编译后，工作空间终端下调用如下命令执行：
+
+    ros2 launch cpp06_urdf display.launch.py model:=`ros2 pkg prefix --share cpp06_urdf`/urdf/urdf/demo02_link.urdf
+
+rviz2 中可以根据 geometry 标签中的设置显示对应形状的机器人。
+
