@@ -1,3 +1,7 @@
+<!-- 
+    需求：为机器人模型添加 base_footprint
+ -->
+
 <robot name="Lbot">
     <material name="green_blue">
         <color rgba="0.6 0.8 0.7 0.8"/>
@@ -7,30 +11,45 @@
         <color rgba="1.0 0.0 0.0 1.0"/>
     </material>
 
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                <sphere radius="0.01"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </visual>
+    </link>
+
     <link name="base_link">
         <visual>
             <geometry>
                 <box size="0.8 0.4 0.2"/>
             </geometry>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <material name="green_blue" />
+            <material name="green_blue"/>    
         </visual>
     </link>
-    
+
     <link name="camera">
         <visual>
             <geometry>
                 <box size="0.05 0.2 0.05"/>
             </geometry>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <material name="yellow" />
+            <material name="yellow"/>    
         </visual>
     </link>
+
+    <joint name="baselink2basefootprint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+    </joint>
 
     <joint name="camera2baselink" type="continuous">
         <parent link="base_link"/>
         <child link="camera"/>
         <origin xyz="0.375 0.0 0.125" rpy="0.0 0.0 0.0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz="0.0 0.0 1.0"/>
     </joint>
 </robot>

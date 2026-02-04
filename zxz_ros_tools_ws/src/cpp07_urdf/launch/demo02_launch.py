@@ -22,7 +22,7 @@ def generate_launch_description():
     default_model_path = os.path.join(
         cpp07_pkg_dir,
         'urdf/urdf', 
-        'demo02_joint.urdf'
+        'demo02_link.urdf'
     )
     default_rviz_path = os.path.join(
         cpp07_pkg_dir,
