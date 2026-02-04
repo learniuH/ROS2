@@ -1,28 +1,5 @@
 # URDF语法
 
-## 01_robot
-
-### 1.简介
-
-urdf中为保证xml语法完整性，使用了`robot`标签作为根标签，所有的link和joint以及其他标签都必须包含在robot标签内，该标签内可以通过`name`属性设置机器人模型的名称。
-
-### 2.属性
-
-- name: 主文件必须具有name属性，name属性在被包含文件中是可选的。如果被包含文件中指定了属性名称，则它必须具有与主文件中相同的值。
-
-### 3.子标签
-
-其他标签都是字集标签。
-
-### 4.实例
-
-```xml
-<robot name="my_robot">
-
-</robot>
-```
-
-
 ## 02_link
 
 ### 1.简介
@@ -33,7 +10,7 @@ urdf 中的 link 标签用于描述机器人某个部件（业绩刚体部分）
 
 ### 2.属性
 
-- name（必填）：为连杆命名。
+- **name**（必填）：为连杆命名。
 
 ### 3.子标签
 
@@ -80,5 +57,30 @@ urdf 中的 link 标签用于描述机器人某个部件（业绩刚体部分）
 功能包 cpp07_urdf 的 urdf/urdf 目录下，新建 urdf 文件 demo02_link.urdf，并编辑文件：
 
 ```xml
-
+<robot name="Lbot">
+    <material name="green_blue">
+        <color rgba="0.6 0.8 0.7 1.0"/>
+    </material>
+    <link name="base_link">
+        <!-- 描述link外观 -->
+        <visual>
+            <!-- 形状 -->
+            <geometry>
+                <!-- 盒状 -->
+                <box size="0.5 0.3 0.2"/>
+                <!-- 球状 -->
+                <!-- <sphere radius="0.5"/> -->
+                <!-- 圆柱 -->
+                <!-- <cylinder radius="0.2" length="1.0"/> -->
+            </geometry>
+            <!-- 平移量和旋转度 -->
+            <origin xyz="1.0 1.0 0.0" rpy="0.0 0.0 0.78"/>
+            <!-- 颜色 -->
+            <!-- <material name="green_blue">
+                <color rgba="0.6 0.8 0.7 1.0"/>
+            </material> -->
+            <material name="green_blue" />
+        </visual>
+    </link>
+</robot>
 ```

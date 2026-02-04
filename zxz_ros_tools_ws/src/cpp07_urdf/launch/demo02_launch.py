@@ -22,12 +22,12 @@ def generate_launch_description():
     default_model_path = os.path.join(
         cpp07_pkg_dir,
         'urdf/urdf', 
-        'demo01_helloworld.urdf'
+        'demo02_joint.urdf'
     )
     default_rviz_path = os.path.join(
         cpp07_pkg_dir,
         'rviz',
-        'demo01.rviz'
+        'demo.rviz'
     )
 
     model = DeclareLaunchArgument('model', default_value=default_model_path)

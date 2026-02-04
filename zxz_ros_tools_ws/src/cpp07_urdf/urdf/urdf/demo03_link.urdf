@@ -1,0 +1,36 @@
+<robot name="Lbot">
+    <material name="green_blue">
+        <color rgba="0.6 0.8 0.7 0.8"/>
+    </material>
+
+    <material name="yellow">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+    </material>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.8 0.4 0.2"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="green_blue" />
+        </visual>
+    </link>
+    
+    <link name="camera">
+        <visual>
+            <geometry>
+                <box size="0.05 0.2 0.05"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="yellow" />
+        </visual>
+    </link>
+
+    <joint name="camera2baselink" type="continuous">
+        <parent link="base_link"/>
+        <child link="camera"/>
+        <origin xyz="0.375 0.0 0.125" rpy="0.0 0.0 0.0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+</robot>
