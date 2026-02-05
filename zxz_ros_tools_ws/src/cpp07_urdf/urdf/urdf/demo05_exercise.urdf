@@ -1,0 +1,125 @@
+<!-- 
+    需求：创建一个四轮机器人模型
+    参数：
+        长      0.2m
+        宽      0.12m
+        高      0.07m
+        车轮半径 0.025m
+        车轮厚度 0.02m
+        离地间距 0.015m
+    测试：使用demo03_launch.py动态添加model路径
+ -->
+ <robot name="Lbot">
+    <!-- 颜色提取 -->
+    <material name="yellow">
+        <color rgba="0.9 0.6 0.0 0.8"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                <sphere radius="0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.2 0.12 0.07"/>
+            </geometry>
+            <material name="yellow" />
+        </visual>
+    </link>
+
+    <!-- 设置离地间距 -->
+    <joint name="basefoot2baselink" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.05"/>
+    </joint>
+
+    <link name="left_front_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.025" length="0.02"/>
+            </geometry>
+            <origin rpy="1.57 0.0 0.0"/>
+            <material name="black" />
+        </visual>
+    </link>
+
+    <!-- 左前轮 -->
+    <joint name="LFwheel2baselink" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_front_wheel"/>
+        <!-- 设置相对baselink的偏移和旋转 -->
+        <origin xyz="0.08 0.06 -0.025"/>
+        <!-- visual标签下设置的origin实际不会改变rpy，此处轮胎还是沿y轴旋转 -->
+        <axis xyz="0.0 1 0.0"/>
+    </joint>
+
+    <!-- 其他车轮实现：右前轮 -->
+    <link name="right_front_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.025" length="0.02"/>
+            </geometry>
+            <origin rpy="1.57 0.0 0.0"/>
+            <material name="black" />
+        </visual>
+    </link>
+
+    <!-- 右前轮 -->
+    <joint name="RFwheel2baselink" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_front_wheel"/>
+        <!-- 设置相对baselink的偏移和旋转 -->
+        <origin xyz="0.08 -0.06 -0.025"/>
+        <axis xyz="0.0 1 0.0"/>
+    </joint>
+
+    <!-- 其他车轮实现：左后轮 -->
+    <link name="left_back_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.025" length="0.02"/>
+            </geometry>
+            <origin rpy="1.57 0.0 0.0"/>
+            <material name="black" />
+        </visual>
+    </link>
+
+    <!-- 左后轮 -->
+    <joint name="LBwheel2baselink" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_back_wheel"/>
+        <!-- 设置相对baselink的偏移和旋转 -->
+        <origin xyz="-0.08 0.06 -0.025"/>
+        <axis xyz="0.0 1 0.0"/>
+    </joint>
+
+    <!-- 其他车轮实现：右后轮 -->
+    <link name="right_back_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.025" length="0.02"/>
+            </geometry>
+            <origin rpy="1.57 0.0 0.0"/>
+            <material name="black" />
+        </visual>
+    </link>
+
+    <!-- 右后轮 -->
+    <joint name="RBwheel2baselink" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_back_wheel"/>
+        <!-- 设置相对baselink的偏移和旋转 -->
+        <origin xyz="-0.08 -0.06 -0.025"/>
+        <axis xyz="0.0 1 0.0"/>
+    </joint>
+ </robot>
