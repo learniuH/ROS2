@@ -1,0 +1,5 @@
+<!-- 演示文件包含 -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Lbot">
+    <xacro:include filename="demo01_property.urdf.xacro" />
+</robot>
