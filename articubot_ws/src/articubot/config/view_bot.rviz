@@ -69,7 +69,7 @@ Visualization Manager:
       Name: TF
       Show Arrows: true
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
         base_link:
           chassis:
@@ -184,7 +184,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.071104645729065
+      Distance: 1.3238707780838013
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -199,10 +199,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: -0.35979706048965454
+      Pitch: 0.15020301938056946
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.5004115104675293
+      Yaw: 4.730419635772705
     Saved: ~
 Window Geometry:
   Displays:
